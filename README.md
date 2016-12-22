@@ -9,6 +9,10 @@ The best Stripe library for React Native.
 ```bash
 $ npm i react-native-stripe-api --save
 ```
+or
+```bash
+$ yarn add react-native-stripe-api
+```
 
 ## Roadmap
 - include a payment form component
@@ -16,21 +20,25 @@ $ npm i react-native-stripe-api --save
 
 ## Setup
 
+### Security issue 
+
+https://github.com/xcarpentier/react-native-stripe-api/issues/8
+
 ### Stripe API
 
 This lib need a Stripe API Key
 ```JavaScript
 const apiKey = '<your Stripe API Key>';
-const Stripe = new Stripe(apiKey);
+const client = new Stripe(apiKey);
 
 // Create a Stripe token with new card infos
-const token = await Stripe.createToken('4242424242424242' , '09', '18', '111');
+const token = await client.createToken('4242424242424242' , '09', '18', '111');
 
 // Create a new customer and link your new card
-const customer = await Stripe.createCustomer(token.id, 'customer@email.com', '<Your user ID>', 'John', 'Doe');
+const customer = await client.createCustomer(token.id, 'customer@email.com', '<Your user ID>', 'John', 'Doe');
 
 // Create charge, 1 USD
-const charge = await Stripe.createCharge(1 * 100, customer.id, 'Payment example','USD');
+const charge = await client.createCharge(1 * 100, customer.id, 'Payment example','USD');
 
 ```
 
@@ -45,6 +53,9 @@ const charge = await Stripe.createCharge(1 * 100, customer.id, 'Payment example'
 | refundCharge | Promise | chargeId: string | Refund a previous charge |
 | addCardToCustomer | Promise | <ul><li>token: string</li><li> customerId: string</li><ul> | Add a new card to a customer |
 | destroyCardOfCustomer | Promise |<ul><li>cardId: string</li><li>customerId: string</li></ul> | Delete a card from a customer |
+
+## Platform support 
+* `> Android 4.4` see https://github.com/xcarpentier/react-native-stripe-api/issues/5
 
 ## Contribution
 
