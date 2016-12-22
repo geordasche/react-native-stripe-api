@@ -71,17 +71,19 @@ class Stripe {
     return result.json();
   }
 
-  createToken(cardNumber: string, expMonth: string, expYear: string, cvc: string): Promise {
+  createToken(cardNumber: string, expMonth: string, expYear: string, cvc: string, name: string): Promise {
     if (!cardNumber) throw new Error(`cardNumber${REQM}`);
     if (!expMonth) throw new Error(`expMonth${REQM}`);
     if (!expYear) throw new Error(`expYear${REQM}`);
     if (!cvc) throw new Error(`cvc${REQM}`);
+    if (!name) throw new Error(`name${REQM}`);
 
     return this.stripePostRequest('tokens', {
       'card[number]': cardNumber,
       'card[exp_month]': expMonth,
       'card[exp_year]': expYear,
       'card[cvc]': cvc,
+      'card[name]': name,
     });
   }
 
